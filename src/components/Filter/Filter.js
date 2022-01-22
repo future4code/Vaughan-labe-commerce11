@@ -10,11 +10,23 @@ export class Filter extends React.Component{
         return <BodyFilter>
             <h3>Filtros</h3>
             <p>Valor mínimo:</p>
-            <input></input>
+            <input 
+                type="number"
+                value={this.props.minFilter}
+                onChange={this.props.onChangeMinFilter}  
+            />
             <p>Valor máximo:</p>
-            <input></input>
+            <input
+                type="number"
+                value={this.props.maxFilter}
+                onChange={this.props.onChangeMaxFilter}
+            />
             <p>Buscar por nome:</p>
-            <input></input>
+            <input
+                type="text"
+                value={this.props.nameFilter}
+                onChange={this.props.onChangeNameFilter}
+            />
         </BodyFilter>
     }
 }

@@ -40,14 +40,80 @@ const products = [
 ]
 
 export class App extends Component {
+  state = {
+    minFilter: '',
+    maxFilter: '',
+    nameFilter: '',
+    productsInCart: []
+  }
+
+  onChangeMinFilter = (event) => {
+    this.setState({minFilter: event.target.value})
+  }
+
+  onChangeMaxFilter = (event) => {
+    this.setState({maxFilter: event.target.value})
+  }
+
+  onChangeNameFilter = (event) => {
+    this.setState({nameFilter: event.target.value})
+  }
+
+  onAddProductToCart = (productId) => {
+    const productInCart = this.state.productsInCart.find(product => productId === product.id)
+    if(productInCart) {
+      const newProductsInCart = this.state.productsInCart.map(product => {
+        if(productId === product.id) {
+          return {
+            ...product,
+            quantity: product.quantity + 1
+          }
+        }
+        return product
+      })
+      this.setState({productsInCart: newProductsInCart})
+    } else {
+      const productToAdd = products.find(product => productId === product.id)
+      const newProductsInCart = [...this.state.productsInCart, {...productToAdd, quantity: 1}]
+      this.setState({productsInCart: newProductsInCart})
+    }
+  }
+
+  onRemoveProductFromCart = (productId) => {
+    const newProductsInCart = this.state.productsInCart.map((product) => {
+      if(product.id === productId) {
+        return {
+          ...product,
+          quantity: product.quantity - 1
+        }
+      }
+      return product
+    }).filter((product) => product.quantity > 0)
+    this.setState({productsInCart: newProductsInCart})
+  }
+
   render() {
     return (
       <ContainerApp>      
-        <Filter/>
+        <Filter
+          minFilter={this.state.minFilter}
+          maxFilter={this.state.maxFilter}
+          nameFilter={this.state.nameFilter}
+          onChangeMinFilter={this.onChangeMinFilter}            
+          onChangeMaxFilter={this.onChangeMaxFilter}            
+          onChangeNameFilter={this.onChangeNameFilter}
+        />
         <Products
         products={products}
+        minFilter={this.state.minFilter}
+        maxFilter={this.state.maxFilter}
+        nameFilter={this.state.nameFilter}
+        onAddProductToCart={this.onAddProductToCart}
         />
-        <ShoppingCart/>
+        <ShoppingCart
+          productsInCart={this.state.productsInCart}
+          onRemoveProductFromCart={this.onRemoveProductFromCart}
+          />
       </ContainerApp>
     )
   }
