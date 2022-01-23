@@ -3,14 +3,22 @@ import styled from 'styled-components';
 import { ShoppingCartItem } from './ShoppingCartItem';
 
 const BodyCarrinho = styled.div`
-    border: 1px solid black;
-    padding: 16px;    
+    border-radius: 15px;
+    padding: 16px;
+    background-color: #062c43;
+    color: white;
+    box-shadow: 0px 2px 6px #062c43;
+        
+        >p{
+            font-family:'Roboto';
+        }
     `
 const CartList = styled.div`
     display: grid;
     gap: 6px;
-    margin: 16px;
+    margin: 10px;
 `
+
 
 export class ShoppingCart extends React.Component{
     getTotalValue = () => {
@@ -34,7 +42,7 @@ export class ShoppingCart extends React.Component{
             })}   
             </CartList>
             
-            <p>Valor Total: R${this.getTotalValue()},00</p>
+            <p><strong>Valor Total:</strong> R$ {this.getTotalValue()},00</p>
         </BodyCarrinho>
     }
 }

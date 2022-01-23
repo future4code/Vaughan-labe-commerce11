@@ -3,17 +3,24 @@ import styled from "styled-components";
 import { ProductBox } from "./ProductsBox";
 
 const BodyProducts = styled.div`
-        
+padding: 20px;        
 `
 const ProductsHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 16px;
+    font-family:'Roboto';
+
+    >label{
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 10px
+    }
 `
 const GridProduct = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 16px;
     padding: 16px;
 `
@@ -40,9 +47,9 @@ export class Products extends React.Component{
         const filteredAndOrderedList = this.getFilteredAndOrderedList()
         return <BodyProducts>
             <ProductsHeader>
-          <p>Quantidade de produtos: {filteredAndOrderedList.length}</p>
+          <p><strong>Produtos encontrados :</strong> {filteredAndOrderedList.length}</p>
         <label>
-          Ordenação:
+          <strong>Ordenação:</strong>
           <select value = {this.state.sort} onChange={this.onChangeSort}>
             <option value={'DECRESCENTE'}>Decrescente</option>
             <option value={'CRESCENTE'}>Crescente</option>

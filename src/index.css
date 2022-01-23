@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family:'Roboto';
+  src: url(fonts/Roboto-Light.ttf);
+}
+@font-face {
+  font-family:'Staatliches';
+  src: url(fonts/Staatliches-Regular.ttf);
+}
